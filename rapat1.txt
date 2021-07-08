@@ -1,0 +1,34 @@
+Fitur-Fitur:
+
+1. Notulensi Rapat Pleno
+    - Modelnya Ngetik! :
+        inputan e -> di dlm modal boostrap (popup)
+        tgl, periode(1-4) sidebar
+    - bid 1 bid 2 bph tergantung login
+    - program menjadi master data
+    - brati ada 2 tabel = tabel 1 isinya master data + 1 kolom bidang (1/2/BPH)
+                          tabel 2 isinya tabel mirip master data(foreign key) + evaluasi + rencana + id_detail + warnasari
+    - sesama bidang bisa ngedit(ketua dan sekre), lintas bidang ga bisa ngedit tpi isa lihat
+
+    bentuknya tabel
+
+    Nama program | Action
+    --------------------------------------------------
+
+    |      | detail
+
+
+    detail isinya tabel_detail
+    edit
+
+to do list:
+    -  rancangan database
+
+deadline 5 juli 2021
+
+
+2. Inputan Tema(
+    1. evaluasi Tema
+    2. buat tema
+)
+3.
