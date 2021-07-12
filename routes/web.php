@@ -32,6 +32,7 @@ Route::middleware('auth')->group(function(){
     Route::get('/masterdata/Program', 'HomeController@Program')->name('master.program');
     Route::get('/notulensi', 'HomeController@Notulensi')->name('notulensi');
     Route::get('/masterdata/MasterProgram', 'HomeController@MasterProgram')->name('master.getDataMaster');
+    Route::get('/masterdata/InputMasterProgram', 'HomeController@InputMasterProgram')->name('input.masterProgram');
 
 
 });

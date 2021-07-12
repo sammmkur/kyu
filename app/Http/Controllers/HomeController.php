@@ -43,4 +43,22 @@ class HomeController extends Controller
                 ->make(true);
 
     }
+    public function InputMasterProgram(Request $request)
+    {
+        $Nomorprogram = $request->Nomorprogram;
+        $NamaProgram=$request->NamaProgram;
+        $Tujuan=$request->Tujuan;
+        $Sasaran=$request->Sasaran;
+        $Kegiatan = $request->Kegiatan;
+        $Tempat=$request->Tempat;
+        $Pelaksana=$request->Pelaksana;
+        $Penanggungjawab=$request->Penanggungjawab;
+        $TotalAnggaran=$request->TotalAnggaran;
+        DB::table('masterdata_program')
+        ->insert(['Nomor_Program'=>$Nomorprogram,'Nama_Program'=>$NamaProgram,'Tujuan'=>$Tujuan,'Sasaran'=>$Sasaran
+        ,'Kegiatan'=>$Kegiatan,'Tanggal_Pelaksanaan'=>now(),'Tempat'=>$Tempat,'Pelaksana'=>$Pelaksana,'Penanggungjawab'=>$Penanggungjawab,'Total_Anggaran'=>$TotalAnggaran]);
+
+        return response()->json(['success'=>'Score saved successfully.']);
+        // return $NamaProgram;
+    }
 }
