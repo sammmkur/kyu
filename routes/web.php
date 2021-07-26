@@ -33,6 +33,10 @@ Route::middleware('auth')->group(function(){
     Route::get('/notulensi', 'HomeController@Notulensi')->name('notulensi');
     Route::get('/masterdata/MasterProgram', 'HomeController@MasterProgram')->name('master.getDataMaster');
     Route::get('/masterdata/InputMasterProgram', 'HomeController@InputMasterProgram')->name('input.masterProgram');
+    Route::get('/masterdata/EditMasterProgram', 'HomeController@EditMasterProgram')->name('input.editProgram');
+    Route::post('/masterdata/ProsesEditMasterProgram', 'HomeController@ProsesEditMasterProgram')->name('input.ProsesEditProgram');
+    Route::get('/masterdata/DeleteProgram', 'HomeController@DeleteProgram')->name('input.deleteProgram');
+    // Route::post('/masterdata/InputMasterProgram/id', 'HomeController@InputUbahMasterProgram')->name('input.UbahmasterProgram');
 
 
 });

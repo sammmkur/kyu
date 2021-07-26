@@ -56,7 +56,7 @@
                                           <th>Pelaksana</th>
                                           <th>Penanggungjawab</th>
                                           <th>Total Anggaran</th>
-                                          {{-- <th>Action</th> --}}
+                                          <th>Action</th>
 
                       </tr>
                     </thead>
@@ -156,7 +156,7 @@
 
                   <div class="col-sm-offset-2 col-sm-10">
                     <button id="SavePage" name="SavePage" class="btn btn-primary col-lg-4">Save <i class="icon-floppy-disk"></i></button>
-                   </button>
+                    {{-- <button id="EditPage" name="EditPage" class="btn btn-primary col-lg-4">Ubah <i class="icon-floppy-disk"></i></button> --}}
                   </div>
 
                   </div>
@@ -168,6 +168,99 @@
             </div>
         </div>
     </div>
+    <div id="ajaxModall" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modelHeading">Ubah Program Kerja</h4>
+                </div>
+                <div class="modal-body">
+
+                     {{-- <form id="ProkerForm" name="ProkerForm" class="form-horizontal"> --}}
+
+                      <div class="row">
+                          <div class="col-lg-12">
+                              <label for="NomorProgram" class="col-lg-3 control-label">Nomor Program</label>
+                              <input type="text" name="NomorProgram" id="NomorProgramm" class="col-lg-4 form-control" >
+                          </div>
+
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12 col-lg-12">
+                          <label for="NamaProker" class="col-lg-3 control-label">Nama Program Kerja</label>
+                          <input type="text" name="NamaProgram" id="NamaProgramm" class="col-lg-6">
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-12 col-lg-12">
+                          <label for="Tujuan" class="col-lg-3 control-label">Tujuan</label>
+                          <textarea class="col-lg-8" name="comment" form="usrform" id="tujuann"></textarea>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-12 col-lg-12">
+                          <label for="Sasaran" class="col-lg-3 control-label">Sasaran</label>
+                          <input type="text" name="Sasaran" id="Sasarann" class="col-lg-6" id="sasaran">
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-lg-12">
+                            <label for="Kegiatan" class="col-lg-3 control-label">Kegiatan</label>
+                            <textarea class="col-lg-8" name="comment" form="usrform" id="kegiatann"></textarea>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                      <div class="col-lg-12">
+                          <label for="Tempat" class="col-lg-3 control-label">Tempat</label>
+                          <input type="text" name="Tempat" id="Tempatt" class="col-lg-6" >
+                      </div>
+
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-12">
+                        <label for="Pelaksana" class="col-lg-3 control-label">Pelaksana</label>
+                        <input type="text" name="Pelaksana" id="Pelaksanaa" class="col-lg-6" >
+                    </div>
+
+                </div>
+                <div class="row">
+                  <div class="col-lg-12">
+                      <label for="Penanggungjawab" class="col-lg-3 control-label">Penanggungjawab</label>
+                      <input type="text" name="Penanggungjawab" id="Penanggungjawabb" class="col-lg-6" >
+                  </div>
+
+              </div>
+              <div class="row">
+                <div class="col-lg-12">
+                    <label for="Total Anggaran" class="col-lg-3 control-label">Total Anggaran</label>
+                    <input type="text" name="Total Anggaran" id="Total_Anggarann" class="col-lg-6" >
+                </div>
+
+            </div>
+
+
+
+
+                      <div class="col-sm-offset-2 col-sm-10">
+                        {{-- <button id="SavePage" name="SavePage" class="btn btn-primary col-lg-4">Save <i class="icon-floppy-disk"></i></button> --}}
+                        <button id="EditPage" name="EditPage" class="btn btn-primary col-lg-4">Ubah <i class="icon-floppy-disk"></i></button>
+                      </div>
+
+                      </div>
+
+
+
+
+                    {{-- </form> --}}
+                </div>
+            </div>
+        </div>
 </div>
 
   @endsection
@@ -184,7 +277,18 @@ $(document).ready(function(){
         // $('#product_id').val('');
         // $('#productForm').trigger("reset");
         // $('#modelHeading').html("Create New Product");
+     $('#NomorProgram').empty();
+  $('#NamaProgram').empty();
+     $('#tujuan').empty();
+   $('#Sasaran').empty();
+     $('#kegiatan').empty();
+   $('#Tempat').empty();
+     $('#Pelaksana').empty();
+   $('#Penanggungjawab').empty();
+    $('#Total_Anggaran').empty();
         $('#ajaxModal').modal('show');
+        $('#SavePage').show();
+
     });
 
     var table = $('#table-master').DataTable({
@@ -219,9 +323,96 @@ $(document).ready(function(){
         {data: 'Pelaksana', name: 'Pelaksana'},
         {data: 'Penanggungjawab', name: 'Penanggungjawab'},
         {data: 'Total_Anggaran', name: 'Total_Anggaran'},
-        // {data: 'action', name: 'action'}
+        {data: 'action', name: 'action'}
 
         ]
+	});
+
+    $('body').on('click', '.editProgram', function () {
+      var NomorProgram = $(this).data('id');
+      console.log(NomorProgram);
+      $('#ajaxModall').modal('show');
+    $('#EditPage').show();
+      $.ajax({
+        type: 'get',
+        url : "{{ route('input.editProgram') }}",
+            data: {
+                NomorProgram:NomorProgram,
+            },
+
+        success: function(data) {
+
+            console.log(data);
+            $('#NomorProgramm').val(data[0].Nomor_Program);
+            $('#NamaProgramm').val(data[0].Nama_Program);
+            $('#tujuann').val(data[0].Tujuan);
+            $('#Sasarann').val(data[0].Sasaran);
+            $('#kegiatann').val(data[0].Kegiatan);
+            $('#Tempatt').val(data[0].Tempat);
+            $('#Pelaksanaa').val(data[0].Pelaksana);
+            $('#Penanggungjawabb').val(data[0].Penanggungjawab);
+            $('#Total_Anggarann').val(data[0].Total_Anggaran);
+
+
+
+        },
+        error: function(response) {
+                console.log(response);
+        }
+    });
+
+
+   });
+
+   $('#EditPage').click(function() {
+    var Nomorprogram = $('#NomorProgramm').val();
+    var NamaProgram = $('#NamaProgramm').val();
+    var Tujuan = $('#tujuann').val();
+    var Sasaran = $('#Sasarann').val();
+    var Kegiatan = $('#kegiatann').val();
+    var Tempat = $('#Tempatt').val();
+    var Pelaksana = $('#Pelaksanaa').val();
+    var Penanggungjawab = $('#Penanggungjawabb').val();
+    var TotalAnggaran = $('#Total_Anggarann').val();
+
+//    console.log(Nomorprogram);
+   $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'post',
+        url : "{{ route('input.ProsesEditProgram') }}",
+            data: {
+                Nomorprogram:Nomorprogram,
+                NamaProgram:NamaProgram,
+                Tujuan:Tujuan,
+                Sasaran:Sasaran,
+                Kegiatan:Kegiatan,
+                Tempat:Tempat,
+                Pelaksana:Pelaksana,
+                Penanggungjawab:Penanggungjawab,
+                TotalAnggaran:TotalAnggaran
+            },
+
+        success: function(data) {
+
+            console.log(data);
+            $('#ajaxModall').modal('hide');
+            table.draw();
+
+
+
+        },
+        error: function(response) {
+                console.log(response);
+        }
+    });
+
+
+
+
 	});
 
   $('#SavePage').click(function() {
@@ -235,8 +426,8 @@ $(document).ready(function(){
     var Penanggungjawab = $('#Penanggungjawab').val();
     var TotalAnggaran = $('#Total_Anggaran').val();
 
-   console.log(Nomorprogram);
-    $.ajaxSetup({
+//    console.log(Nomorprogram);
+$.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
@@ -253,12 +444,14 @@ $(document).ready(function(){
                 Tempat:Tempat,
                 Pelaksana:Pelaksana,
                 Penanggungjawab:Penanggungjawab,
-                TotalAnggaran:TotalAnggaran,
+                TotalAnggaran:TotalAnggaran
             },
 
         success: function(data) {
 
             console.log(data);
+            $('#ajaxModal').modal('hide');
+            table.draw();
 
 
 
@@ -272,6 +465,39 @@ $(document).ready(function(){
 
 
 	});
+
+    $('body').on('click', '.deleteProgram', function () {
+      var NomorProgram = $(this).data('id');
+      console.log(NomorProgram);
+    //   $('#ajaxModall').modal('show');
+    // $('#EditPage').show();
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+      $.ajax({
+        type: 'get',
+        url : "{{ route('input.deleteProgram') }}",
+            data: {
+                NomorProgram:NomorProgram,
+            },
+
+        success: function(data) {
+            table.draw();
+            console.log(data);
+
+
+
+
+        },
+        error: function(response) {
+                console.log(response);
+        }
+    });
+
+
+   });
 
 
 });
